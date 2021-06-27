@@ -1,0 +1,115 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "task4",
+    "description": "Tarefa 4",
+    "version": "1.0.0",
+    "contact": {
+      "email": "gabrielsos99@gmail.com"
+    } 
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Create a user",
+        "description": "Create a user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "nome do usuário",
+                  "email": "email do usuário"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "E-mail já cadastrado"
+          }
+        }
+      }
+    },
+    "/users/:user_id/admin":{
+      "patch": {
+        "summary": "Transforma um usuário em admin",
+        "description": "Transforma um usuário em admin",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário virou admin"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          }
+        }
+      }
+    },
+    "/users/:user_id":{
+      "get": {
+        "summary": "Busca um usuário pelo ID",
+        "description": "Busca um usuário pelo ID",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna o usuário"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          }
+        }
+      }
+    },
+    "/userss":{
+      "get": {
+        "summary": "Admin pode listar todos os usuários",
+        "description": "Admin pode listar todos os usuários",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "headers",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna o usuário"
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "description": "Usuário não é admin"
+          }
+        }
+      }
+    }
+  }
+}
