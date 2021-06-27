@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { User } from "../../model/User";
 import { IUsersRepository, ICreateUserDTO } from "../IUsersRepository";
 
@@ -19,23 +20,46 @@ class UsersRepository implements IUsersRepository {
   }
 
   create({ name, email }: ICreateUserDTO): User {
-    // Complete aqui
+    const user = new User();
+    user.name = name;
+    user.email = email;
+    user.admin = false;
+    user.created_at = new Date();
+    user.updated_at = new Date();
+
+    this.users.push(user);
+
+    return user;
   }
 
   findById(id: string): User | undefined {
-    // Complete aqui
+    const user = this.users.find((user) => user.id === id);
+
+    if (user) {
+      return user;
+    }
   }
 
   findByEmail(email: string): User | undefined {
-    // Complete aqui
+    const user = this.users.find((user) => user.email === email);
+
+    if (user) {
+      return user;
+    }
   }
 
   turnAdmin(receivedUser: User): User {
-    // Complete aqui
+    const findUser = this.users.find((user) => user === receivedUser);
+
+    findUser.admin = true;
+
+    return findUser;
   }
 
   list(): User[] {
-    // Complete aqui
+    const user = this.users;
+
+    return user;
   }
 }
 
